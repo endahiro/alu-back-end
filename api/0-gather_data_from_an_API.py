@@ -5,7 +5,7 @@ import sys
 
 
 if __name__ == "__main__":
-    employee_id = int(sys.argv[1])
+    employee_id = sys.argv[1]
 
     base_url = "https://jsonplaceholder.typicode.com"
 
@@ -22,7 +22,7 @@ if __name__ == "__main__":
     ).json()
 
     total_tasks = len(todos)
-    done_tasks = [task for task in todos if task.get("completed") is True]
+    done_tasks = [task for task in todos if task.get("completed")]
 
     print(
         "Employee {} is done with tasks({}/{}):".format(

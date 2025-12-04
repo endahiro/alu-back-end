@@ -37,4 +37,3 @@ if __name__ == "__main__":
                 str(task.get("completed")),
                 task.get("title")
             ])
-

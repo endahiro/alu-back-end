@@ -41,4 +41,3 @@ if __name__ == "__main__":
     # Completed tasks titles
     for task in done_tasks:
         print("\t {}".format(task.get("title")))
-

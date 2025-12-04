@@ -1,18 +1,12 @@
 #!/usr/bin/python3
-"""Script that exports an employee's TODO list to CSV."""
+"""Export an employee's TODO list to CSV."""
 import csv
 import requests
 import sys
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        sys.exit(1)
-
-    try:
-        employee_id = int(sys.argv[1])
-    except ValueError:
-        sys.exit(1)
+    employee_id = sys.argv[1]
 
     base_url = "https://jsonplaceholder.typicode.com"
 
@@ -23,8 +17,10 @@ if __name__ == "__main__":
 
     # Get todos for this user
     todos_url = "{}/todos".format(base_url)
-    params = {"userId": employee_id}
-    todos = requests.get(todos_url, params=params).json()
+    todos = requests.get(
+        todos_url,
+        params={"userId": employee_id}
+    ).json()
 
     filename = "{}.csv".format(employee_id)
 
@@ -32,8 +28,8 @@ if __name__ == "__main__":
         writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
         for task in todos:
             writer.writerow([
-                str(employee_id),
+                employee_id,
                 username,
-                str(task.get("completed")),
+                task.get("completed"),
                 task.get("title")
             ])
